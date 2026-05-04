@@ -105,8 +105,8 @@ This repository contains code supporting Pixhawk standard boards (best supported
     * [Pixfalcon](https://docs.px4.io/master/en/flight_controller/pixfalcon.html)
 
 ### Manufacturer and Community supported
-  * [Kerloud Uno (FMUV6x)](http://cloudkernel-tech.gitee.io/kerloud-autopilot/hardware/kerloud_uno/)
-  * [Kerloud Mini (FMUV3)](http://cloudkernel-tech.gitee.io/kerloud-autopilot/hardware/kerloud_mini/)
+  * [Kerloud Uno (FMUV6x)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_uno/)
+  * [Kerloud Mini (FMUV3)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_mini/)
   * [Holybro Durandal](https://docs.px4.io/master/en/flight_controller/durandal.html)
   * [Hex Cube Orange](https://docs.px4.io/master/en/flight_controller/cubepilot_cube_orange.html)
   * [Hex Cube Yellow](https://docs.px4.io/master/en/flight_controller/cubepilot_cube_yellow.html)
