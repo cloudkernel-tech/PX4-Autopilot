@@ -81,6 +81,8 @@ private:
 
 	int			write(uint8_t reg, uint8_t data);
 
+	int             _i2c_addr;
+
 	float			_brightness{1.0f};
 
 	uint8_t		_r{0};
@@ -123,6 +125,8 @@ RGBLED_NCP5623C::RGBLED_NCP5623C(const I2CSPIDriverConfig &config) :
 
 		ordering /= 10;
 	}
+
+	_i2c_addr = config.i2c_address;
 }
 
 int
@@ -226,9 +230,17 @@ RGBLED_NCP5623C::send_led_rgb()
 	uint8_t brightness = UINT8_MAX;
 
 	msg[0] = NCP5623_LED_CURRENT | (brightness & 0x1f);
-	msg[2] = _red | (uint8_t(_r * _brightness) & 0x1f);
-	msg[4] = _green | (uint8_t(_g * _brightness) & 0x1f);
-	msg[6] = _blue | (uint8_t(_b * _brightness) & 0x1f);
+
+	if (_i2c_addr == NCP5623B_ADDR){
+		msg[2] = _red | (uint8_t(_b * _brightness) & 0x1f);
+		msg[4] = _green | (uint8_t(_g * _brightness) & 0x1f);
+		msg[6] = _blue | (uint8_t(_r * _brightness) & 0x1f);
+
+	} else if (_i2c_addr == NCP5623C_ADDR){
+		msg[2] = _red | (uint8_t(_r * _brightness) & 0x1f);
+		msg[4] = _green | (uint8_t(_g * _brightness) & 0x1f);
+		msg[6] = _blue | (uint8_t(_b * _brightness) & 0x1f);
+	}
 
 	return transfer(&msg[0], 7, nullptr, 0);
 }

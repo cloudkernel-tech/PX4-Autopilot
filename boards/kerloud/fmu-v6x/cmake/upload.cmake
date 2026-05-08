@@ -1,6 +1,6 @@
 ############################################################################
 #
-#   Copyright (c) 2020 PX4 Development Team. All rights reserved.
+#   Copyright (c) 2023 PX4 Development Team. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -31,18 +31,19 @@
 #
 ############################################################################
 
-px4_add_module(
-	MODULE drivers__magnetometer__bosch__bmm150
-	MAIN bmm150
-	COMPILE_FLAGS
-	SRCS
-		BMM150.cpp
-		BMM150.hpp
-                bmm150_i2c.cpp
-                bmm150_spi.cpp
-		bmm150_main.cpp
-		Bosch_BMM150_registers.hpp
-	DEPENDS
-		drivers_magnetometer
-		px4_work_queue
-	)
+
+set(PX4_FW_NAME ${PX4_BINARY_DIR}/${PX4_BOARD_VENDOR}_${PX4_BOARD_MODEL}_${PX4_BOARD_LABEL}.px4)
+
+add_custom_target(upload_skynode_usb
+	COMMAND ${PX4_SOURCE_DIR}/Tools/auterion/upload_skynode.sh --file=${PX4_FW_NAME}
+	DEPENDS ${PX4_FW_NAME}
+	COMMENT "Uploading PX4"
+	USES_TERMINAL
+)
+
+add_custom_target(upload_skynode_wifi
+	COMMAND ${PX4_SOURCE_DIR}/Tools/auterion/upload_skynode.sh --file=${PX4_FW_NAME} --wifi
+	DEPENDS ${PX4_FW_NAME}
+	COMMENT "Uploading PX4"
+	USES_TERMINAL
+)
