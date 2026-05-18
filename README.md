@@ -103,7 +103,7 @@ These boards fully comply with Pixhawk Standard, and are maintained by the PX4-A
 
 These boards are maintained to be compatible with PX4-Autopilot by the Manufacturers.
 
-* [Kerloud Uno (FMUV6c)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_uno)
+* [Kerloud Uno (FMUV6X)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_uno)
 * [Kerloud Mini (FMUV3)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_mini)
 * [ARK Electronics ARKV6X](https://docs.px4.io/main/en/flight_controller/arkv6x.html)
 * [CubePilot Cube Orange+](https://docs.px4.io/main/en/flight_controller/cubepilot_cube_orangeplus.html)
