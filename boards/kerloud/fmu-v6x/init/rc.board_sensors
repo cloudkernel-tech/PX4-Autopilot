@@ -1,0 +1,72 @@
+#!/bin/sh
+#
+# Kerloud Uno FMUv6X specific board sensors init
+#------------------------------------------------------------------------------
+set HAVE_PM2 yes
+
+if mft query -q -k MFT -s MFT_PM2 -v 0
+then
+	set HAVE_PM2 no
+fi
+if param compare -s ADC_ADS1115_EN 1
+then
+	ads1115 start -X
+else
+	board_adc start
+fi
+
+
+if param compare SENS_EN_INA226 1
+then
+	# Start Digital power monitors
+	ina226 -X -b 1 -t 1 -k start
+
+	if [ $HAVE_PM2 = yes ]
+	then
+		ina226 -X -b 2 -t 2 -k start
+	fi
+fi
+
+if param compare SENS_EN_INA228 1
+then
+	# Start Digital power monitors
+	ina228 -X -b 1 -t 1 -k start
+	if [ $HAVE_PM2 = yes ]
+	then
+		ina228 -X -b 2 -t 2 -k start
+	fi
+fi
+
+if param compare SENS_EN_INA238 1
+then
+	# Start Digital power monitors
+	ina238 -X -b 1 -t 1 -k start
+	if [ $HAVE_PM2 = yes ]
+	then
+		ina238 -X -b 2 -t 2 -k start
+	fi
+fi
+
+
+# ICM-42670P in SPI1 bus
+icm42670p -s -b 1 -R 14 start
+
+# BMI088 in SPI3 bus (Acc & gyro)
+bmi088 -A -R 14 -s -b 3 start
+bmi088 -G -R 14 -s -b 3 start
+
+# BMM150 in SPI4 bus
+bmm150 -b 4 -R 6 start
+
+# External compass on GPS1/I2C1 (the 3rd external bus)
+ist8310 -X -b 1 -R 10 start
+
+# Possible internal Baro (i2c4)
+bmp388 -I -b 4 -a 0x76 start
+
+# ncp5623d
+rgbled_ncp5623c stop  # stop existing instances
+usleep 1000
+rgbled_ncp5623c -a 0x38 -o 321 -X start
+
+unset HAVE_PM2

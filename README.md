@@ -52,6 +52,9 @@ For the latest stats on contributors please see the latest stats for the Droneco
 
 ## Supported Hardware
 
+* [Kerloud Uno (FMUV6X)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_uno)
+* [Kerloud Mini (FMUV3)](https://cloudkernel.cn/kerloud-autopilot/hardware/kerloud_mini)
+
 For the most up to date information, please visit [PX4 User Guide > Autopilot Hardware](https://docs.px4.io/main/en/flight_controller/).
 
 ## Project Governance
